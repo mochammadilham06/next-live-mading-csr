@@ -1,0 +1,34 @@
+.popover {
+  position: relative;
+  display: inline-block;
+}
+
+.popover-content {
+  position: absolute;
+  top: calc(100% + -30px);
+  left: 0;
+  width: 200px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 999;
+}
+
+.popover:active .popover-content {
+  display: block;
+}
+
+.popover-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popover-menu li {
+  margin-bottom: 5px;
+}
+
+.popover-menu li:last-child {
+  margin-bottom: 0;
+}

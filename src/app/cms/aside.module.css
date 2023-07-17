@@ -1,0 +1,11 @@
+.asideclosed {
+  transform: translateX(-100%);
+}
+.mainopen {
+  flex: 1;
+}
+
+.mainclosed {
+  flex: 0;
+  overflow: hidden;
+}
