@@ -80,37 +80,46 @@ const AdminLayout = ({ children }: any) => {
         <nav className="mt-4">
           <ul>
             {sidebarItems.map((item, index) => (
-              <li
-                key={index}
-                className={`cursor-pointer flex justify-center lg:justify-normal ${
-                  pathname === item.route
-                    ? " text-md flex  gap-3 py-3 my-1 bg-socialBlue text-white mx-5 lg:mx-2 px-2 rounded-md shadow-md shadow-gray-300 items-center"
-                    : "flex gap-3 py-2 my-2 hover:bg-blue-500 hover:bg-opacity-50 mx-5 lg:mx-2 px-2 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
-                }`}
-                onClick={() => {
-                  handleTabClick(item.route);
-                }}
-              >
-                {item.icon}
+              <React.Fragment key={index}>
                 {item.route ? (
-                  <Link
-                    href={item.route}
-                    passHref
-                    className={`hidden text-center lg:block ${
-                      pathname === item.route ? "font-bold" : ""
-                    }`}
-                  >
-                    {item.name}
+                  <Link href={item.route} passHref>
+                    <li
+                      className={`cursor-pointer flex justify-center lg:justify-normal ${
+                        pathname === item.route
+                          ? " text-md flex gap-3 py-3 my-1 bg-socialBlue text-white mx-5 lg:mx-2 px-2 rounded-md shadow-md shadow-gray-300 items-center"
+                          : "flex gap-3 py-2 my-2 hover:bg-blue-500 hover:bg-opacity-50 mx-5 lg:mx-2 px-2 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+                      }`}
+                      onClick={() => {
+                        handleTabClick(item.route);
+                      }}
+                    >
+                      {item.icon}
+                      <div
+                        className={`text-center hidden lg:block ${
+                          pathname === item.route ? "font-bold" : ""
+                        }`}
+                      >
+                        {item.name}
+                      </div>
+                    </li>
                   </Link>
                 ) : (
-                  <div
-                    className="hidden text-center lg:block"
+                  <li
+                    key={index}
+                    className={`cursor-pointer flex justify-center lg:justify-normal ${
+                      pathname === item.route
+                        ? " text-md flex gap-3 py-3 my-1 bg-socialBlue text-white mx-5 lg:mx-2 px-2 rounded-md shadow-md shadow-gray-300 items-center"
+                        : "flex gap-3 py-2 my-2 hover:bg-blue-500 hover:bg-opacity-50 mx-5 lg:mx-2 px-2 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+                    }`}
                     onClick={item.onClick}
                   >
-                    {item.name}
-                  </div>
+                    {item.icon}
+                    <div className="text-center hidden lg:block">
+                      {item.name}
+                    </div>
+                  </li>
                 )}
-              </li>
+              </React.Fragment>
             ))}
           </ul>
         </nav>
@@ -127,8 +136,7 @@ const AdminLayout = ({ children }: any) => {
           </button>
           <div className="flex items-center">
             <div className="text-sm">
-              <div className="font-medium text-gray-700">Steven Jobs</div>
-              <div className="text-gray-400">jobs@sailboatui.com</div>
+              <div className="font-medium text-gray-700 mx-3">Admin1</div>
             </div>
             <div className="relative h-10 w-10">
               <img
