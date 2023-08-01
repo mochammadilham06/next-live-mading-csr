@@ -9,6 +9,7 @@ import { ErrorAlert } from "@live-component/Alert/AlertError";
 import { useRouter } from "next/navigation";
 import { SuccessAlert } from "@live-component/Alert/AlertSuccess";
 import { setCookie } from "cookies-next";
+import { LoadingSpinner } from "@live-config/images";
 
 const LoginPage = () => {
   const initialData = {
@@ -18,6 +19,7 @@ const LoginPage = () => {
   const router = useRouter();
   const [form, setForm] = useState<Auth>(initialData);
   const [dataUser, setData] = useState<ResponseUsersAuth[] | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -29,6 +31,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await APIAuth.Login(form);
       setData(data);
@@ -58,6 +61,8 @@ const LoginPage = () => {
     } catch (error) {
       console.error("Error during login:", error);
       ErrorAlert("Gagal", "Gagal Melakukan Login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,10 +109,11 @@ const LoginPage = () => {
 
             <div className="">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 hover:bg-blue-700 flex justify-center text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline"
                 type="submit"
+                disabled={loading}
               >
-                Sign In
+                {loading ? <LoadingSpinner /> : "Sign in"}
               </button>
               <h5 className="my-3 text-center">
                 Dont have an account?

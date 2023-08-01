@@ -20,3 +20,4 @@ export { default as EditIcon } from "@live-asset/svg/edit";
 export { default as TrashIcon } from "@live-asset/svg/trash";
 export { default as SendIcon } from "@live-asset/svg/send";
 export { default as ArrowDownIcon } from "@live-asset/svg/arrow";
+export { default as LoadingSpinner } from "@live-asset/svg/loading";
