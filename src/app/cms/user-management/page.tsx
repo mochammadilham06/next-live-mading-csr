@@ -15,7 +15,8 @@ import ModalUserManagement from "@live-component/ModalCMS/user-management";
 const UserManagement = () => {
   const [content, setContent] = useState<GetAllUser[]>();
   const [loading, setLoading] = useState<boolean>(false);
-
+  const itemsPerPage = 8; // Number of items to display per page
+  const [currentPage, setCurrentPage] = useState(1);
   const getData = async () => {
     setLoading(true);
     try {
@@ -52,9 +53,21 @@ const UserManagement = () => {
   const handleUpdateSuccess = () => {
     getData();
   };
+  // Calculate the indexes for the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // Get the current items for the current page
+  const currentItems = content?.slice(indexOfFirstItem, indexOfLastItem);
+  // Total number of pages
+  const totalPages = Math.ceil((content?.length || 0) / itemsPerPage);
+  // Change page
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
+  };
   useEffect(() => {
     getData();
-  }, []);
+  }, [currentPage]);
+
   return (
     <AdminLayout>
       <h3 className="text-xl font-bold text-gray-400 my-5">
@@ -69,7 +82,7 @@ const UserManagement = () => {
             <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
               <THeadUserManagement />
               <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-                {content?.map((item, index) => (
+                {currentItems?.map((item, index) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">{index + 1}</td>
 
@@ -100,6 +113,23 @@ const UserManagement = () => {
             </table>
           </div>
         )}
+        <div className="flex justify-center gap-2 mt-5">
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`${
+                  currentPage === page
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-blue-500"
+                } px-4 py-2 rounded-md focus:outline-none`}
+              >
+                {page}
+              </button>
+            )
+          )}
+        </div>
       </Card>
     </AdminLayout>
   );

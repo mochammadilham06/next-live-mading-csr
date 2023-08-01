@@ -1,71 +1,52 @@
 import React from "react";
 import AdminLayout from "../page";
 import Card from "@live-component/Card";
+import { UserCountIcon, ValidatekIcon, XMarkIcon } from "@live-config/images";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const { data: userData } = await getDataUser();
+  const { data: contentData } = await getContentUser();
+  const countValidations = (validationStatus: boolean) => {
+    return contentData.filter(
+      (item: any) => item.validation === validationStatus
+    ).length;
+  };
   return (
     <AdminLayout>
       <h3 className="text-xl font-bold text-gray-400 my-5">Dashboard</h3>
       <Card>
         <div className="flex gap-5 flex-col lg:flex-row justify-between">
           <div className="w-full lg:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow">
-            <svg
-              className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-            </svg>
+            <UserCountIcon />
             <a href="#">
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 ">
-                Need a help in Claim?
+                Users Count
               </h5>
             </a>
-            <p className="mb-3 font-normal text-gray-500 ">
-              Go to this step by step guideline process on how to certify for
-              your weekly benefits:
+            <p className="mb-3 font-normal text-gray-500 text-lg">
+              {userData?.length} User active
             </p>
           </div>
           <div className="w-full lg:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow">
-            <svg
-              className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-            </svg>
+            <ValidatekIcon />
             <a href="#">
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 ">
-                Need a help in Claim?
+                Validate Content
               </h5>
             </a>
-            <p className="mb-3 font-normal text-gray-500 ">
-              Go to this step by step guideline process on how to certify for
-              your weekly benefits:
+            <p className="mb-3 font-normal text-gray-500 text-lg">
+              {countValidations(true)} Validated Contents
             </p>
           </div>
           <div className="w-full lg:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow">
-            <svg
-              className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-            </svg>
+            <XMarkIcon />
             <a href="#">
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 ">
-                Need a help in Claim?
+                Not Validate Content
               </h5>
             </a>
-            <p className="mb-3 font-normal text-gray-500 ">
-              Go to this step by step guideline process on how to certify for
-              your weekly benefits:
+            <p className="mb-3 font-normal text-gray-500 text-lg">
+              {countValidations(false)} Not Valdated Contents
             </p>
           </div>
         </div>
@@ -75,3 +56,35 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+async function getContentUser() {
+  try {
+    const res = await fetch(`https://works-project.hasura.app/api/rest/post`, {
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        "x-hasura-admin-secret": `0SwWGQ0TgVvMh2qJRz940Z5QePsofSfk1TJjLT1sX0I5pk71WO8O5Sdn0ANlgSvk`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function getDataUser() {
+  try {
+    const res = await fetch(
+      `https://works-project.hasura.app/api/rest/cms/user`,
+      {
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+          "x-hasura-admin-secret": `0SwWGQ0TgVvMh2qJRz940Z5QePsofSfk1TJjLT1sX0I5pk71WO8O5Sdn0ANlgSvk`,
+        },
+      }
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}

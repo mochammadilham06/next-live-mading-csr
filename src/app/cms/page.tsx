@@ -136,7 +136,7 @@ const AdminLayout = ({ children }: any) => {
           </button>
           <div className="flex items-center">
             <div className="text-sm">
-              <div className="font-medium text-gray-700 mx-3">Admin1</div>
+              <div className="font-medium text-gray-700 mx-3">Admin 1</div>
             </div>
             <div className="relative h-10 w-10">
               <img

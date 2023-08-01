@@ -21,3 +21,6 @@ export { default as TrashIcon } from "@live-asset/svg/trash";
 export { default as SendIcon } from "@live-asset/svg/send";
 export { default as ArrowDownIcon } from "@live-asset/svg/arrow";
 export { default as LoadingSpinner } from "@live-asset/svg/loading";
+export { default as UserCountIcon } from "@live-asset/svg/userCount";
+export { default as XMarkIcon } from "@live-asset/svg/xmark";
+export { default as ValidatekIcon } from "@live-asset/svg/validate";
